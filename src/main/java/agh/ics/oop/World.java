@@ -5,11 +5,18 @@ import java.util.ArrayList;
 public class World {
 
     public static void main(String[] args) {
-        System.out.println("System wystartowal");
+        /*System.out.println("System wystartowal");
         String[] tablica = {"f","f","r", "l"}; //testowa tablica komend
         ArrayList<Direction> comands = convert(args);
         run(comands);
-        System.out.println("system zakonczyl dzialanie");
+        System.out.println("system zakonczyl dzialanie");*/
+
+        Vector2d position1 = new Vector2d(1,2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+
     }
 
     public static void run( ArrayList<Direction> com){
@@ -29,7 +36,6 @@ public class World {
                     System.out.println("Zwierzak skreca w lewo");
                     break;
                 default:
-                    System.out.println("nie ma tego");
                     break;
             }
 
