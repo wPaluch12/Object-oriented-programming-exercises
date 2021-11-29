@@ -66,14 +66,14 @@ public class Vector2d {
         return lowerL;
     }
     public Vector2d add(Vector2d other){
-        int x1= this.x + other.x;
-        int y1 = this.y + other.y;
+        int x1 = this.x + (other.x);
+        int y1 = this.y + (other.y);
         Vector2d sum = new Vector2d(x1, y1);
         return sum;
     }
     public Vector2d subtract(Vector2d other){
-        int x1= this.x - other.x;
-        int y1 = this.y - other.y;
+        int x1= this.x - (other.x);
+        int y1 = this.y - (other.y);
         Vector2d sub = new Vector2d(x1, y1);
         return sub;
     }
