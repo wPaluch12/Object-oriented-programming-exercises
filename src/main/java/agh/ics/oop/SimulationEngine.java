@@ -8,6 +8,7 @@ public class SimulationEngine implements IEngine{
     private IWorldMap map;
     private Vector2d[] startingPoints;
     private ArrayList<Animal> animals = new ArrayList<>();
+    private ArrayList<Grass> grasses = new ArrayList<>();
 
     public SimulationEngine(MoveDirection[] moves,  IWorldMap map, Vector2d[] startingPoints) {
         this.moves = moves;
@@ -16,6 +17,7 @@ public class SimulationEngine implements IEngine{
         for(Vector2d position: this.startingPoints){
             map.place(new Animal(map, position));
         }
+
     }
 
     public ArrayList<Animal> getAnimals(){
@@ -25,19 +27,23 @@ public class SimulationEngine implements IEngine{
 
     @Override
     public void run(){
-        RectangularMap rec = (RectangularMap) map;
+        //RectangularMap rec = (RectangularMap)map;
+        GrassField rec = (GrassField)map;
         int w = rec.getWidth();
         int h = rec.getHeight();
         for(int k = 0; k <= w; k++) {
             for (int j = 0; j <= h; j++) {
                 Vector2d test = new Vector2d(k, j);
-                Animal anim =(Animal)this.map.objectAt(test);
+                Object anim = this.map.objectAt(test);
                 if( anim != null){
-                    this.animals.add(anim);
+                    if (anim  instanceof Animal ) {
+                        this.animals.add((Animal) anim);
+                    }
                 }
+
             }
         }
-
+        System.out.println(map.toString());
         for(int i = 0; i < moves.length; i++) {
             if(moves[i] != null) {
                 if(i%2 == 0){
@@ -50,13 +56,11 @@ public class SimulationEngine implements IEngine{
 
                 }
 
-                /*for (Animal aim: animals) {
-                    aim.move(moves[i]);
-                }*/
-
-                System.out.println(map.toString());
+                //System.out.println(map.toString());
             }
         }
+        System.out.println(map.toString());
+
     }
 
 }
