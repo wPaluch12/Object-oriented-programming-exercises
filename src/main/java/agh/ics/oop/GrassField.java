@@ -7,11 +7,7 @@ public class GrassField extends AbstractWorldMap{
 
     private  Integer grassfield_number;
 
-    private ArrayList<Grass> grassfield = new ArrayList<>();
-    /*private ArrayList<Animal> animals = new ArrayList<>();
-
-    private Integer width = 0;
-    private Integer height = 0;*/
+    private final ArrayList<Grass> grassfield = new ArrayList<>();
 
     public GrassField(int grassfield_number){
 
@@ -27,12 +23,14 @@ public class GrassField extends AbstractWorldMap{
 
             Grass grass = new Grass(new Vector2d(x,y));
 
-            while( this.GrassAt(grass.getGrass_position())){
+            while(this.GrassAt(grass.getGrass_position()) ){ //(!this.isOccupied(grass.getGrass_position()) )||
                 x = (int)Math.floor(Math.random()*(max_gras+1)+0);
                 y = (int)Math.floor(Math.random()*(max_gras+1)+0);
                 grass = new Grass(new Vector2d(x,y));
             }
             this.grassfield.add(grass);
+            this.objects.put(grass.getGrass_position(),grass);
+
 
         }
     }
@@ -63,15 +61,16 @@ public class GrassField extends AbstractWorldMap{
         if(super.isOccupied(position)){
             return true;
         }
-        for(Grass grass : this.grassfield){
+        return this.objects.get(position) instanceof Grass;
+       /* for(Grass grass : this.grassfield){
             if(grass.getGrass_position().equals(position))
                 return true;
-        }
-        return false;
+        }*/
+        //return false;
     }
 
 
-    @Override
+/*    @Override
     public Object objectAt(Vector2d position) {
         Object object =  super.objectAt(position);
         if(object instanceof Animal){
@@ -83,7 +82,7 @@ public class GrassField extends AbstractWorldMap{
             }
         }
         return null;
-    }
+    }*/
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -101,6 +100,8 @@ public class GrassField extends AbstractWorldMap{
         }
         return true;
     }
+
+
 
 
 }

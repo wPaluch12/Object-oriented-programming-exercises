@@ -47,13 +47,20 @@ public class SimulationEngine implements IEngine{
         for(int i = 0; i < moves.length; i++) {
             if(moves[i] != null) {
                 if(i%2 == 0){
-                    for( int k =0; k < animals.size(); k+=2)
+                    for( int k =0; k < animals.size(); k+=2){
+
+                        //Vector2d old = animals.get(k).getPosition();
                         animals.get(k).move(moves[i]);
+                        //((GrassField) map).positionChanged(old,animals.get(k).getPosition() );
+                    }
                 }
                 else {
                     for( int k =1; k < animals.size(); k+=2)
+                    {
+                        //Vector2d old = animals.get(k).getPosition();
                         animals.get(k).move(moves[i]);
-
+                        //((GrassField) map).positionChanged(old,animals.get(k).getPosition());
+                    }
                 }
 
                 //System.out.println(map.toString());

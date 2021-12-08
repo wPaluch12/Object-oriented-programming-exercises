@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Objects;
+
 public class Vector2d {
     public final int x;
     public final int y;
@@ -10,19 +12,14 @@ public class Vector2d {
     }
 
     public String toString() {
-        String s = "("+this.x+","+this.y+")";
-        return s;
+        return "("+ this.x+","+ this.y+")";
     }
     public boolean precedes(Vector2d other){
-        if((this.x <= other.x) && (this.y <= other.y))
-            return true;
-        return false;
+        return (this.x <= other.x) && (this.y <= other.y);
 
     }
     public boolean follows(Vector2d other){
-        if((this.x >= other.x) && (this.y >= other.y))
-            return true;
-        return false;
+        return (this.x >= other.x) && (this.y >= other.y);
     }
     public Vector2d upperRight(Vector2d other){
         int x1;
@@ -41,8 +38,7 @@ public class Vector2d {
         } else {
             y1 = other.y;
         }
-        Vector2d upperR = new Vector2d(x1, y1);
-        return upperR;
+        return new Vector2d(x1, y1);
     }
 
     public Vector2d lowerLeft(Vector2d other){
@@ -62,37 +58,39 @@ public class Vector2d {
         } else {
             y1 = other.y;
         }
-        Vector2d lowerL = new Vector2d(x1, y1);
-        return lowerL;
+        return new Vector2d(x1, y1);
     }
     public Vector2d add(Vector2d other){
         int x1 = this.x + (other.x);
         int y1 = this.y + (other.y);
-        Vector2d sum = new Vector2d(x1, y1);
-        return sum;
+        return new Vector2d(x1, y1);
     }
     public Vector2d subtract(Vector2d other){
         int x1= this.x - (other.x);
         int y1 = this.y - (other.y);
-        Vector2d sub = new Vector2d(x1, y1);
-        return sub;
+        return new Vector2d(x1, y1);
     }
     public boolean equals(Object other){
         if (this == other)
             return true;
         if (!(other instanceof Vector2d))
             return false;
-        Vector2d that = (Vector2d) other;
+        Vector2d that = (Vector2d)other;
         if (this.x == that.x && this.y==that.y)
             return true;
-        else return false;
+        if(this.hashCode()==that.hashCode())
+            return true;
+        else
+            return false;
     }
     public Vector2d opposite(){
         int x1 = (-1)*this.x;
         int y1 = (-1)*this.y;
-        Vector2d oppo = new Vector2d(x1, y1);
-        return oppo;
+        return new Vector2d(x1, y1);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.x, this.y);
     }
 
 }
-// pakiety w javie
