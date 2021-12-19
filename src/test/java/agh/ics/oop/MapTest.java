@@ -2,6 +2,9 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,30 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
+
+    @Test
+    void CheckOptionParser(){
+        String[] args = {"r","f", "f"};
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        Assertions.assertEquals( directions[0],MoveDirection.RIGHT );
+        Assertions.assertEquals( directions[1],MoveDirection.FORWARD );
+        Assertions.assertEquals( directions[2],MoveDirection.FORWARD );
+
+        String[] args1 = {"r","f", "f", "w"};
+
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MoveDirection[] directions1 = new OptionsParser().parse(args1);
+        });
+
+        String expectedMessage = "w is not legal move specification";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+
+
+
     @Test
     void CheckMove(){
         String[] args = {"r","f", "f"};

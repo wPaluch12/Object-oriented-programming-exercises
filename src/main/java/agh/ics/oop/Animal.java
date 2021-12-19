@@ -125,7 +125,7 @@ public class Animal {
 
 
 
-  public void addObserver(IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer){
       this.observers.add(observer);
   }
 

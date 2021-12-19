@@ -21,23 +21,16 @@ public class Vector2d {
     public boolean follows(Vector2d other){
         return (this.x >= other.x) && (this.y >= other.y);
     }
+
     public Vector2d upperRight(Vector2d other){
         int x1;
         int y1;
         if (this.x== other.x){
             x1 = this.x;
-        } else if (this.x > other.x){
-            x1= this.x;
-        } else {
-            x1 = other.x;
-        }
+        } else x1 = Math.max(this.x, other.x);
         if (this.y== other.y){
             y1 = this.y;
-        } else if (this.y > other.y){
-            y1= this.y;
-        } else {
-            y1 = other.y;
-        }
+        } else y1 = Math.max(this.y, other.y);
         return new Vector2d(x1, y1);
     }
 
@@ -46,18 +39,10 @@ public class Vector2d {
         int y1;
         if (this.x== other.x){
             x1 = this.x;
-        } else if (this.x < other.x){
-            x1= this.x;
-        } else {
-            x1 = other.x;
-        }
+        } else x1 = Math.min(this.x, other.x);
         if (this.y== other.y){
             y1 = this.y;
-        } else if (this.y < other.y){
-            y1= this.y;
-        } else {
-            y1 = other.y;
-        }
+        } else y1 = Math.min(this.y, other.y);
         return new Vector2d(x1, y1);
     }
     public Vector2d add(Vector2d other){

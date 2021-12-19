@@ -2,22 +2,31 @@ package agh.ics.oop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     public ArrayList<Animal> animals = new ArrayList<>();
     Map<Vector2d, Object> objects = new HashMap<>();
     public Integer width =0 ;
     public Integer height = 0;
+    public MapBoundary mapBoundary;
 
+
+    public AbstractWorldMap() {
+        this.mapBoundary = new MapBoundary();
+    }
 
     public boolean place(Animal animal) {
         if(this.canMoveTo(animal.getPosition())){
             this.objects.put(animal.getPosition(), animal);
             animal.addObserver(this);
+            mapBoundary.placeAnimal(animal);
             return true;
         }
-        return false;
+        else{
+            throw new IllegalArgumentException("Cannot place object at position: "+ animal.getPosition() + "There's already an animal");
+        }
         /*if (this.isOccupied(animal.getPosition())){
             return false;
         }
@@ -64,22 +73,13 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
        return this.objects.get(position);
     }
 
-    public String toString(){
-        MapVisualizer mapVisualizer = new MapVisualizer(this);
-        return mapVisualizer.draw(new Vector2d(0,0), new Vector2d(this.width,this.height));
-    }
-
-    /*@Override
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        Animal animal = (Animal)objects.get(oldPosition);
-        objects.remove(oldPosition);
-        objects.put(newPosition,animal);
-    }
-
     @Override
-    public void update(Vector2d oldPosition, Vector2d newPosition){
-        this.positionChanged(oldPosition, newPosition);
-    }*/
+    public String toString() {
+        MapVisualizer mapVisualizer = new MapVisualizer(this);
+        return mapVisualizer.draw(mapBoundary.getLeftCorner(), mapBoundary.getRightCorner());
+    }
+
+
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         Animal animal = (Animal)objects.get(oldPosition);

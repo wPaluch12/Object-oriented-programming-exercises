@@ -48,7 +48,6 @@ public class SimulationEngine implements IEngine{
             if(moves[i] != null) {
                 if(i%2 == 0){
                     for( int k =0; k < animals.size(); k+=2){
-
                         //Vector2d old = animals.get(k).getPosition();
                         animals.get(k).move(moves[i]);
                         //((GrassField) map).positionChanged(old,animals.get(k).getPosition() );

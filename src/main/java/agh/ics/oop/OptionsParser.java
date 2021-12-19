@@ -10,17 +10,15 @@ public class OptionsParser {
             case "b", "backward" -> (MoveDirection.BACKWARD);
             case "r", "right" -> (MoveDirection.RIGHT);
             case "l", "left" -> (MoveDirection.LEFT);
-            default -> (null);
+            default -> throw new IllegalArgumentException(args + " is not legal move specification");
         };
     }
 
     public static MoveDirection[] parse(String[] args) {
         List<MoveDirection> movesList = new ArrayList<>();
-        for (int i = 0; i <args.length; i++){
-            MoveDirection move = parse(args[i]);
-            if (move != null) {
-                movesList.add(move);
-            }
+        for (String arg : args) {
+            MoveDirection move = parse(arg);
+            movesList.add(move);
         }
         return(movesList.toArray(new MoveDirection[0]));
     }

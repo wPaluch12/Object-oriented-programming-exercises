@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.lang.Math;
 
-public class GrassField extends AbstractWorldMap{
+public class GrassField extends AbstractWorldMap {
 
     private  Integer grassfield_number;
 
@@ -29,6 +29,7 @@ public class GrassField extends AbstractWorldMap{
                 grass = new Grass(new Vector2d(x,y));
             }
             this.grassfield.add(grass);
+            mapBoundary.placeGrass(grass);
             this.objects.put(grass.getGrass_position(),grass);
 
 
@@ -70,7 +71,7 @@ public class GrassField extends AbstractWorldMap{
     }
 
 
-/*    @Override
+    @Override
     public Object objectAt(Vector2d position) {
         Object object =  super.objectAt(position);
         if(object instanceof Animal){
@@ -82,7 +83,7 @@ public class GrassField extends AbstractWorldMap{
             }
         }
         return null;
-    }*/
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -100,8 +101,5 @@ public class GrassField extends AbstractWorldMap{
         }
         return true;
     }
-
-
-
 
 }

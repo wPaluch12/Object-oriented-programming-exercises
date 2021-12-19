@@ -32,7 +32,15 @@ public class GrassFieldTest {
         Animal animal1 = new Animal(new Vector2d(2,1), MapDirection.EAST);
         map.place(animal1);
         Animal animal2 = new Animal(new Vector2d(2,1), MapDirection.NORTH);
-        map.place(animal2);
+
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            map.place(animal2);
+        });
+
+        String expectedMessage = "Cannot place object at position: "+ animal2.getPosition() + "There's already an animal";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
         System.out.println(map);
 
     }
